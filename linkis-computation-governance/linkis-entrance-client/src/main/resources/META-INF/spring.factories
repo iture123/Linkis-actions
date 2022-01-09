@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.apache.linkis.entranceclient.conf.ClientForEntranceSpringConfiguration,\
+org.apache.linkis.entranceclient.conf.ClientSpringConfiguration
