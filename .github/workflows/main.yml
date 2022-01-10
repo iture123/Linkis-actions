@@ -34,6 +34,7 @@ jobs:
       run: |
         mvn -N install
         mvn apache-rat:check
+        find -type f -name "rat.txt"
     - name: Upload the report
       uses: actions/upload-artifact@v2
       with:
