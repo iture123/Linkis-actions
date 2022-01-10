@@ -31,7 +31,9 @@ jobs:
         java-version: '8'
         distribution: 'adopt'
     - name: License check with Maven
-      run: mvn apache-rat:check
+      run: |
+        mvn -N install
+        mvn apache-rat:check
     - name: Upload the report
       uses: actions/upload-artifact@v2
       with:
