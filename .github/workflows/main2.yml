@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-name: License check
+name: License check2
 
 on: [push, pull_request]
 
