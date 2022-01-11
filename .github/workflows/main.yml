@@ -34,6 +34,7 @@ jobs:
       run: |
         mvn -N install | tail
         rat_file=`mvn apache-rat:check  | grep -oe "\\S\\+/rat.txt"`
+        echo "rat_file=$rat_file"
         if [[ -n "$rat_file" ]];then tail $rat_file && exit 1;else echo "check success!" ;fi
     - name: Upload the report
       uses: actions/upload-artifact@v2
