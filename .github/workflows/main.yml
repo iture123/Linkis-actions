@@ -32,7 +32,7 @@ jobs:
         distribution: 'adopt'
     - name: License check with Maven
       run: |
-        mvn -N install | tail
+        mvn -N install
         rat_file=`mvn apache-rat:check  | grep -oe "\\S\\+/rat.txt"`
         echo "rat_file=$rat_file"
         if [[ -n "$rat_file" ]];then cat $rat_file && exit 1;else echo "check success!" ;fi
