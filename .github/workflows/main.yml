@@ -35,7 +35,7 @@ jobs:
         mvn -N install
     - name: License check with Maven
       run: |
-        rat_file=`mvn apache-rat:check  | grep -oe "\\S\\+/rat.txt"`
+        rat_file=`mvn apache-rat:check  | { grep -oe "\\S\\+/rat.txt" || true; }`
         echo "rat_file=$rat_file"
         if [[ -n "$rat_file" ]];then  echo "check error!" && cat $rat_file && exit 123;else echo "check success!" ;fi
     - name: Upload the report
