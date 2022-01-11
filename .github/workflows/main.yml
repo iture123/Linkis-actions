@@ -37,7 +37,7 @@ jobs:
       run: |
         rat_file=`mvn apache-rat:check  | grep -oe "\\S\\+/rat.txt"`
         echo "rat_file=$rat_file"
-        if [[ -n "$rat_file" ]];then cat $rat_file && exit 1;else echo "check success!" ;fi
+        if [[ -n "$rat_file" ]];then  echo "check error!" && cat $rat_file && exit 123;else echo "check success!" ;fi
     - name: Upload the report
       uses: actions/upload-artifact@v2
       with:
