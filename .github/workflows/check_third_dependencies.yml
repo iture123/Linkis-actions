@@ -39,9 +39,10 @@ jobs:
     - name: get current dependencies
       run:
         mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=~/current_dependencies
-        ls ~/current_dependencies  |egrep -v "^linkis" |sort -n > ~/current_dependencies.txt
-        
+        ls ~/current_dependencies  |egrep -v "^linkis" |sort > ~/current_dependencies.txt
     - name: check third dependencies 
       run: |
-        join -t : -o 1.1 2.1 -a2 ${{ github.workspace }}/tool/dependencies/known-dependencies.txt ~/current_dependencies.txt > ~/result.txt
+        sort ${{ github.workspace }}/tool/dependencies/known-dependencies.txt > ~/known-dependencies.txt 
+        join -t : -o 1.1 2.1 -a2 ~/known-dependencies.txt ~/current_dependencies.txt > ~/result.txt
         awk -F ":" '{if($1=="")print $2" is not in file known-dependencies.txt!"}' result.txt
+        if [[ -n "$result" ]];then exit 1;else echo "All third dependencies is known!" ;fi
