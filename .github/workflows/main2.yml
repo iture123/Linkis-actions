@@ -31,9 +31,8 @@ jobs:
         java-version: '8'
         distribution: 'adopt'
     - name: License check with Maven
-      run: |
-        mvn -N install
-        mvn apache-rat:check
+      run: 
+        echo "github.workspace =${{ github.workspace }}"
     - name: Upload the report
       uses: actions/upload-artifact@v2
       with:
