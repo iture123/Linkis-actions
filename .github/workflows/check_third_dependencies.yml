@@ -37,7 +37,7 @@ jobs:
     - name: get current dependencies
       run:
         mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=~/current_dependencies
-        ls ~/current_dependencies  |egrep -v "^linkis" |sort  > ~/current_dependencies.txt
+        ls ~/current_dependencies  |egrep -v "^linkis" |sort -n > ~/current_dependencies.txt
         
     - name: check third dependencies 
       run: |
