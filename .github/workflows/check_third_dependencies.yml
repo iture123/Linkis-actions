@@ -37,16 +37,16 @@ jobs:
       run:
         mvn install
     - name: get current dependencies
-      run:
+      run: |
         mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=~/current_dependencies
         ls ~/current_dependencies  |egrep -v "^linkis" |sort > ~/current_dependencies.txt
+    - name: current_dependencies.txt
+      run:
+         cat ~/current_dependencies.txt
     - name: check third dependencies 
       run: |
         sort ${{ github.workspace }}/tool/dependencies/known-dependencies.txt > ~/known-dependencies.txt 
         join -t : -o 1.1 2.1 -a2 ~/known-dependencies.txt ~/current_dependencies.txt > ~/result.txt
-        echo "-current_dependencies.txt begin-"
-        cat ~/current_dependencies.txt
-        echo "-current_dependencies.txt end-"
         echo "-known-dependencies.txt begin-"
         cat ~/known-dependencies.txt
         echo "-known-dependencies.txt end-"
