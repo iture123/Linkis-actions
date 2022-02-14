@@ -36,12 +36,12 @@ jobs:
     - name: mvn install
       run:
         mvn install
-    - name: get current dependencies
-      run: |
+    - name: mvn dependency:copy-dependencies 
+      run: 
         mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=~/current_dependencies
-        ls ~/current_dependencies  |egrep -v "^linkis" |sort > ~/current_dependencies.txt
-    - name: current_dependencies.txt
-      run:
+    - name: generate current_dependencies.txt
+      run: |
+         ls ~/current_dependencies  |egrep -v "^linkis" |sort > ~/current_dependencies.txt
          cat ~/current_dependencies.txt
     - name: check third dependencies 
       run: |
