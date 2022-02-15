@@ -47,10 +47,6 @@ jobs:
       run: |
         sort ${{ github.workspace }}/tool/dependencies/known-dependencies.txt > ~/known-dependencies.txt 
         join -t : -o 1.1 2.1 -a2 ~/known-dependencies.txt ~/current_dependencies.txt > ~/result.txt
-        echo "-known-dependencies.txt begin-"
-        cat ~/known-dependencies.txt
-        echo "-known-dependencies.txt end-"
-        cat  ~/result.txt
-        echo "----reslt end---"
         awk -F ":" '{if($1=="")print $2" is not in file known-dependencies.txt!"}' ~/result.txt
-        if [[ -n "$result" ]];then exit 1;else echo "All third dependencies is known!" ;fi
+        result=`awk -F ":" '{if($1=="")print $2}' result |wc -l`
+        if [[ $result == 0 ]];then echo "All third dependencies is known!" ;else exit 1;fi
